@@ -1,9 +1,16 @@
 package com.zensar.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 
@@ -14,6 +21,16 @@ public class Product {
 	private int productId;
 	private String productName;
 	private int productCost;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	 @JoinTable(
+		        name="p_vendor",
+		        joinColumns=
+		            @JoinColumn(name="PRODUCT_ID"),
+		        inverseJoinColumns=
+		            @JoinColumn(name="VENDOR_ID")
+		    )
+	private List<Vendor> vendors;
 
 	public Product() {
 		super();
@@ -48,6 +65,16 @@ public class Product {
 
 	public void setProductCost(int productCost) {
 		this.productCost = productCost;
+	}
+	
+	
+
+	public List<Vendor> getVendors() {
+		return vendors;
+	}
+
+	public void setVendors(List<Vendor> vendors) {
+		this.vendors = vendors;
 	}
 
 	@Override
