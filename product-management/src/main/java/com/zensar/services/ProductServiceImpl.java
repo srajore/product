@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zensar.entity.Product;
+import com.zensar.entity.Vendor;
 import com.zensar.repositories.ProductRepository;
+import com.zensar.repositories.VendorRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+
+
 
 	@Override
 	public Product getProduct(int productId) {
@@ -33,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product insertProduct(Product product) {
-
 		return productRepository.save(product);
 	}
 

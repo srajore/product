@@ -1,19 +1,17 @@
 package com.zensar.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 @Entity
-
 public class Product {
 
 	@Id
@@ -22,14 +20,7 @@ public class Product {
 	private String productName;
 	private int productCost;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	 @JoinTable(
-		        name="p_vendor",
-		        joinColumns=
-		            @JoinColumn(name="PRODUCT_ID"),
-		        inverseJoinColumns=
-		            @JoinColumn(name="VENDOR_ID")
-		    )
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.ALL} )
 	private List<Vendor> vendors;
 
 	public Product() {
