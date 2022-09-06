@@ -15,12 +15,12 @@ import javax.persistence.OneToMany;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
 	private String productName;
 	private int productCost;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.ALL} )
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.ALL} ,orphanRemoval = true)
 	private List<Vendor> vendors;
 
 	public Product() {
